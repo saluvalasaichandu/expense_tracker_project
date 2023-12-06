@@ -1,11 +1,15 @@
-
-import './App.css';
-import Signup from './Profile/Signup'
+import { useState } from 'react';
+import Signup from './Components/Profile/Signup';
+import Welcome from './Welcome';
 function App() {
+  const [isLogin,setIsLogin]=useState(false);
+  const loginHandler=()=>{
+    setIsLogin(true);
+  }
   return (
     <div className="App">
-     <h1>Expense Tracker</h1>
-     <Signup/>
+      {!isLogin && <Signup onLogin={loginHandler}/>}
+      {isLogin && <Welcome/>}
     </div>
   );
 }
