@@ -1,12 +1,12 @@
 import React from 'react'
-import { useRef ,useState} from 'react'
-const Signup = (props) => {
+import { useRef, useContext,useState} from 'react';
+import AuthContext from '../../Store/AuthContext';
+const Signup = () => {
     const[isLogin,setIslogin]=useState(false);
-
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
     const confirmPasswordInputref=useRef();
-
+    const authCtx=useContext(AuthContext);
     const switchAuthHandler=()=>{
         setIslogin((prevState)=>!prevState)
     };
@@ -63,19 +63,20 @@ const Signup = (props) => {
                 else{
                     alert("successfully signed up")
                 }
-                console.log(data);
-                localStorage.setItem("token",data.idToken)
-                props.onLogin();
+                // console.log(data);
+                // localStorage.setItem("token",data.idToken)
+                // props.onLogin();
+                authCtx.login(data.idToken)
             })
             .catch((err)=>{
                 alert(err.message)
             });   
     }
   return (
-    <div>
-          <h1>{isLogin ? "Login" : "Signup"}</h1>
-        <form onSubmit={submitHandler}>
-            <div>
+    <div className='p-4 m-4'>
+          <h1 className='text-3xl font-bold'>{isLogin ? "Login" : "Signup"}</h1>
+        <form onSubmit={submitHandler} className='font-serif py-2'>
+            <div >
                 <label>Enter Email </label>
                 <input type='text' placeholder='Email' required ref={emailInputRef}></input>
             </div>
@@ -87,7 +88,7 @@ const Signup = (props) => {
                 <label>Confirm Password </label>
                 <input type='password' placeholder='Confirm Password'  required ref={confirmPasswordInputref}></input>
             </div>)}
-            <div>
+            <div className="bg-lime-500 w-1/12">
                 <button>{isLogin ? "Login":"SignUp"}</button>
             </div>
         </form>
