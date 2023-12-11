@@ -8,7 +8,6 @@ var formData={
     email:"",
     name:"",
 };
-
 const Welcome = () => {
     const idToken = localStorage.getItem("tokenET");
     const authCtx=useContext(AuthContext);

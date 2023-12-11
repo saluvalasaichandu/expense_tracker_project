@@ -4,6 +4,9 @@ import Signup from './Components/Profile/Signup';
 import { useContext } from 'react';
 import Welcome from "./Components/Welcome/Welcome"
 import AuthContext from './Store/AuthContext';
+import VerifyEmail from "./Components/Profile/verifyEmail"
+import { createBrowserRouter,RouterProvider} from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
 function App() {
   // const [isLogin,setIsLogin]=useState(false);
   // const loginHandler=()=>{
@@ -19,5 +22,20 @@ function App() {
     </div>
   );
 }
-
+const router=createBrowserRouter([
+  {
+  path:"/welcome",
+  element:(
+    <Welcome/>
+  )
+},
+{
+  path:"/verify",
+  element:(
+    <VerifyEmail/>
+  )
+}])
+createRoot(document.getElementById("root")).render(
+  <RouterProvider router={router} />
+);
 export default App;

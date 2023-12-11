@@ -1,12 +1,16 @@
 import React from 'react'
 import { useRef, useContext,useState} from 'react';
 import AuthContext from '../../Store/AuthContext';
+// import {useHistory} from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
     const[isLogin,setIslogin]=useState(false);
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
     const confirmPasswordInputref=useRef();
     const authCtx=useContext(AuthContext);
+    // const history=useHistory();
+    const navigate=useNavigate();
     const switchAuthHandler=()=>{
         setIslogin((prevState)=>!prevState)
     };
@@ -67,6 +71,8 @@ const Signup = () => {
                 // localStorage.setItem("token",data.idToken)
                 // props.onLogin();
                 authCtx.login(data.idToken)
+                // history.push("/verify")
+                navigate.push("/verify")
             })
             .catch((err)=>{
                 alert(err.message)
@@ -74,6 +80,7 @@ const Signup = () => {
     }
   return (
     <div className='p-4 m-4'>
+        
           <h1 className='text-3xl font-bold'>{isLogin ? "Login" : "Signup"}</h1>
         <form onSubmit={submitHandler} className='font-serif py-2'>
             <div >
