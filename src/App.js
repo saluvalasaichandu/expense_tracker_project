@@ -7,7 +7,9 @@ import AuthContext from './Store/AuthContext';
 import VerifyEmail from "./Components/Profile/verifyEmail"
 import { createBrowserRouter,RouterProvider} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
+import ForgotPassword from './Components/Profile/ForgotPassword';
 function App() {
+
   // const [isLogin,setIsLogin]=useState(false);
   // const loginHandler=()=>{
   //   setIsLogin(true);
@@ -40,6 +42,12 @@ const router=createBrowserRouter([
     path:"/",
     element:(
       <Signup></Signup>
+    )
+  },
+  {
+    path:"/forgotPassword",
+    element:(
+      <ForgotPassword/>
     )
   }
 ])

@@ -3,7 +3,8 @@ import { useContext,useState } from 'react';
 import InputForm from './InputForm';
 import AuthContext from '../../Store/AuthContext';
 // import { json } from 'react-router-dom';
-
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 var formData={
     email:"",
     name:"",
@@ -13,6 +14,8 @@ const Welcome = () => {
     const authCtx=useContext(AuthContext);
     const[isUpdated,setIsUpdated]=useState(false);
 
+    // const history=useHistory();
+    const navigate=useNavigate();
 
 
     const profileHandler=()=>{
@@ -90,6 +93,9 @@ const Welcome = () => {
     }
     const logoutHandler=()=>{
         authCtx.logout();
+        // history.replace("/");
+        // navigate.replace("/")
+        navigate("/")
     }
     
   return (

@@ -15,6 +15,8 @@ const Signup = () => {
         setIslogin((prevState)=>!prevState)
     };
 
+   
+
     const submitHandler=(e)=>{
         e.preventDefault();
         const enteredEmail=emailInputRef.current.value;
@@ -77,7 +79,12 @@ const Signup = () => {
             .catch((err)=>{
                 alert(err.message)
             });   
+   
     }
+    const forgotPasswordHandler=()=>{
+        navigate('/forgotPassword');
+    }
+    
   return (
     <div className='p-4 m-4'>
         
@@ -95,8 +102,15 @@ const Signup = () => {
                 <label>Confirm Password </label>
                 <input type='password' placeholder='Confirm Password'  required ref={confirmPasswordInputref}></input>
             </div>)}
+
+            <div>
+                <button type='button' onClick={forgotPasswordHandler}>
+                    ForgotPassword
+                </button>
+            </div>
+
             <div className="bg-lime-500 w-1/12">
-                <button>{isLogin ? "Login":"SignUp"}</button>
+                <button type='submit'>{isLogin ? "Login":"SignUp"}</button>
             </div>
         </form>
         <button type="button" onClick={switchAuthHandler}>{isLogin ? "Dont have an account? Signup" : "Have an Account?Login"}
