@@ -18,7 +18,8 @@ function App() {
       {/* {!isLogin && <Signup onLogin={loginHandler}/>}
       {isLogin && <Welcome/>} */}
       {!authCtx.isLoggedin && <Signup></Signup>}
-      {authCtx.isLoggedin && <Welcome></Welcome>}
+      {/* {authCtx.isLoggedin && <Welcome></Welcome>} */}
+      {authCtx.isLoggedin && <Welcome/>}
     </div>
   );
 }
@@ -34,7 +35,14 @@ const router=createBrowserRouter([
   element:(
     <VerifyEmail/>
   )
-}])
+},
+  {
+    path:"/",
+    element:(
+      <Signup></Signup>
+    )
+  }
+])
 createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );

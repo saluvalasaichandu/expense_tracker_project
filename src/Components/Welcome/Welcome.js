@@ -11,7 +11,7 @@ var formData={
 const Welcome = () => {
     const idToken = localStorage.getItem("tokenET");
     const authCtx=useContext(AuthContext);
-    const[isUpated,setIsUpdated]=useState(false);
+    const[isUpdated,setIsUpdated]=useState(false);
 
 
 
@@ -88,6 +88,9 @@ const Welcome = () => {
             alert(err.message)
         });
     }
+    const logoutHandler=()=>{
+        authCtx.logout();
+    }
     
   return (
     <>
@@ -95,6 +98,9 @@ const Welcome = () => {
         
          <p> Welcome to ExpenseTracker Page!!</p>
          <p>Your Profile is incomplete <button onClick={profileHandler}>Complete Your Profile</button></p>
+    </div>
+    <div>
+        <button onClick={logoutHandler}>Logout</button>
     </div>
     <InputForm data={formData}/>
     </>
