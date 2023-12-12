@@ -100,12 +100,13 @@ const Welcome = () => {
     
   return (
     <>
-    <div>
+    <div className='font-sans p-2 m-2'>
         
-         <p> Welcome to ExpenseTracker Page!!</p>
-         <p>Your Profile is incomplete <button onClick={profileHandler}>Complete Your Profile</button></p>
+         <p className='text-4xl'> Welcome to ExpenseTracker Page!!</p>
+         <p className='text-lg p-2'>Your Profile is incomplete...
+         <button onClick={profileHandler} className='text-lime-600 px-2' >Complete Your Profile</button></p>
     </div>
-    <div>
+    <div className='px-60 text-xl text-red-600'>
         <button onClick={logoutHandler}>Logout</button>
     </div>
     <InputForm data={formData}/>
