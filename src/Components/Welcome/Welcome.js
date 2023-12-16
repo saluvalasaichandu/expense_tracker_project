@@ -25,6 +25,7 @@ const Welcome = () => {
     }
 
     const profileHandler=()=>{
+        setIsNavigated(false);
         fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBGZHVIOrHGdhqLgr3AkPQoFPv2UZMymXA",{
             method:'POST',
             body:JSON.stringify({

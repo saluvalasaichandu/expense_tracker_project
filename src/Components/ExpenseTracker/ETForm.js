@@ -2,6 +2,7 @@ import React from "react";
 import { useRef,useContext } from "react";
 import ETList from "./ETList";
 import ExpenseContext from "../../Store/ExpenseContext";
+import axios from "axios";
 const ETForm=(props)=>{
 
     const amountInputRef=useRef();
@@ -20,7 +21,29 @@ const ETForm=(props)=>{
             description: description,
             category: category,
           };
-          expCntxt.addExpense(expense);
+        //   expCntxt.addExpense(expense);
+
+        axios
+      .post(
+        "https://expensetrackerproject-8b493-default-rtdb.firebaseio.com/expenses.json",
+        expense
+      )
+      .then((res) => {
+        console.log(res);
+        axios
+          .get(
+            "https://expensetrackerproject-8b493-default-rtdb.firebaseio.com/expenses.json"
+          )
+          .then((res) => {
+            let datas = res.data;
+            for (let id in datas) {
+              let expenses = datas[id];
+              expenses.id = id;
+              console.log(expenses);
+              expCntxt.addExpense(expenses);
+            }
+          });
+      });
     }
     const expenses=expCntxt.expenses.map((exp)=>(
         <ETList
