@@ -5,6 +5,8 @@ import AuthContext from '../../Store/AuthContext';
 // import { json } from 'react-router-dom';
 // import { useHistory } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+
+import ETForm from '../ExpenseTracker/ETForm';
 var formData={
     email:"",
     name:"",
@@ -13,10 +15,14 @@ const Welcome = () => {
     const idToken = localStorage.getItem("tokenET");
     const authCtx=useContext(AuthContext);
     const[isUpdated,setIsUpdated]=useState(false);
+    const [isNavigated,setIsNavigated]=useState(false)
 
     // const history=useHistory();
     const navigate=useNavigate();
 
+    const navigationHandler=()=>{
+        setIsNavigated(false);
+    }
 
     const profileHandler=()=>{
         fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBGZHVIOrHGdhqLgr3AkPQoFPv2UZMymXA",{
@@ -96,6 +102,8 @@ const Welcome = () => {
         // history.replace("/");
         // navigate.replace("/")
         navigate("/")
+        
+        // history.pushState("/")
     }
     
   return (
@@ -109,7 +117,10 @@ const Welcome = () => {
     <div className='px-60 text-xl text-red-600'>
         <button onClick={logoutHandler}>Logout</button>
     </div>
-    <InputForm data={formData}/>
+    {/* <InputForm data={formData}/> */}
+
+    {!isNavigated &&(<InputForm data={formData} navigation={navigationHandler}/>)}
+    {isNavigated && <ETForm></ETForm>}
     </>
   )
 }

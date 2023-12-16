@@ -5,47 +5,65 @@ import { useContext } from 'react';
 import Welcome from "./Components/Welcome/Welcome"
 import AuthContext from './Store/AuthContext';
 import VerifyEmail from "./Components/Profile/verifyEmail"
+
 import { createBrowserRouter,RouterProvider} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import ForgotPassword from './Components/Profile/ForgotPassword';
-import { Navigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
+import ETForm from './Components/ExpenseTracker/ETForm';
+
 function App() {
 
   // const [isLogin,setIsLogin]=useState(false);
   // const loginHandler=()=>{
   //   setIsLogin(true);
   // }
-const authCtx=useContext(AuthContext);
-
-const router=createBrowserRouter([
- 
+  const authCtx=useContext(AuthContext);
+  return (
+    <div>
+      {/* {!isLogin && <Signup onLogin={loginHandler}/>}
+      {isLogin && <Welcome/>} */}
+      {!authCtx.isLoggedin && <Signup></Signup>}
+      {/* {authCtx.isLoggedin && <Welcome></Welcome>} */}
+      {/* {authCtx.isLoggedin && <Welcome/>} */}
+      {authCtx.isLoggedin && <Welcome/>}
+    </div>
+  );
+}
+ export const router=createBrowserRouter([
+  {
+  path:"/welcome",
+  element:(
+    <Welcome/>
+  )
+},
+{
+  path:"/verify",
+  element:(
+    <VerifyEmail/>
+  )
+},
   {
     path:"/",
-    element: authCtx.isLoggedin ? <Navigate to="/welcome"></Navigate>:<Signup/>
-    // element: !authCtx.isLoggedin ? <Signup/>: <Link to="/welcome"></Link>
-  },
-
-  {
-    path:"/signup",
-    element:<Signup></Signup>
-  },
-  {
-    path:"/welcome",
-    element:<Welcome/>
-  },
-  {
-    path:"/verify",
-    element:<VerifyEmail></VerifyEmail>
+    element:(
+      <Signup></Signup>
+    )
   },
   {
     path:"/forgotPassword",
-    element:<ForgotPassword></ForgotPassword>
+    element:(
+      <ForgotPassword/>
+    )
+  },
+  {
+    path:"/expensetracker",
+    element:(
+      <ETForm/>
+    )
   }
 ])
 createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
 
-}
+
 export default App;

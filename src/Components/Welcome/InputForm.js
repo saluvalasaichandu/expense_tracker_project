@@ -13,6 +13,8 @@ const InputForm=(props)=>{
             <div className="text-xl font-serif px-32 py-4  ">
                 <button className="text-sky-500">Update Details</button>
             </div>
+
+            <button onClick={props.navigation}>Expense Tracker</button>
             </form>
     )
 };
