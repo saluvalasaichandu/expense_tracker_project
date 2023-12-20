@@ -37,7 +37,22 @@ export const ExpenseContextProvider = (props) => {
   const updateExpensesHandler=(expensesArray)=>{
     updateExpenses(expensesArray)
   }
-  const removeExpenseHandler = () => {};
+
+  
+  const removeExpenseHandler = (id) => {
+    axios
+      .delete(
+        ` https://expensetrackerproject-8b493-default-rtdb.firebaseio.com/expenses/${id}.json`
+      )
+      .then((response) => {
+        const existingExpenses = [...expenses];
+        const itemIdx = existingExpenses.findIndex((i) => i._id === id);
+        existingExpenses.splice(itemIdx, 1);
+        updateExpenses(existingExpenses);
+      })
+
+      .catch((err) => console.log(err));
+  };
   const contextValue = {
     expenses: expenses,
     addExpense: addExpenseHandler,
